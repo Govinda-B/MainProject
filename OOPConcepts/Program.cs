@@ -37,6 +37,19 @@ namespace OOPConcepts
 
             int Cost = product1.Buy(10);
             Console.WriteLine(Cost);
+
+            Laptop laptop1 = new Laptop
+            { Id = 4, Name = "Macbook", Price = 99000, Quantity = 3, IsBacklightKeyboard = true, RAM = 8, Processor = "M1" };
+
+            Laptop laptop2 = new Laptop
+            { Id = 5, Name = "Macbook intel", Price = 119000, Quantity = 5, IsBacklightKeyboard = true, RAM = 8, Processor = "I5" };
+
+            Laptop laptop3 = new Laptop
+            { Id = 4, Name = "Macbook", Price = 99000, Quantity = 3, IsBacklightKeyboard = true, RAM = 8, Processor = "M1" };
+
+            laptop1.Stock(3);
+            int costoflaptop1 = laptop1.Buy(1);
+            Console.WriteLine(costoflaptop1);
         }
     }
 }

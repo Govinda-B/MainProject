@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOPConcepts
 {
-    public class Product
+    public class Product    //Parent Class
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -26,5 +26,7 @@ namespace OOPConcepts
             Quantity -= quantity;
             return quantity * Price;
         }
+
+        
     }
 }
