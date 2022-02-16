@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billing", "Billing\Billing.csproj", "{E0387051-43E8-4219-9AE7-74160E83C315}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0387051-43E8-4219-9AE7-74160E83C315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0387051-43E8-4219-9AE7-74160E83C315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0387051-43E8-4219-9AE7-74160E83C315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0387051-43E8-4219-9AE7-74160E83C315}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
