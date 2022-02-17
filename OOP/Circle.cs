@@ -12,12 +12,8 @@ namespace OOP
         public double Radius { get; set; }
         public Circle()
         {
-<<<<<<<<< Temporary merge branch 1
-=========
-
->>>>>>>>> Temporary merge branch 2
         }
-        public double Area(double radius)
+        public static double Area(double radius)
         {
             return PI * radius * radius;
         }
