@@ -12,6 +12,7 @@ namespace OOP
         public double Radius { get; set; }
         public Circle()
         {
+
         }
         public double Area(double radius)
         {
