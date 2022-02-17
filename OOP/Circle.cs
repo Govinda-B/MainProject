@@ -9,7 +9,7 @@ namespace OOP
 {
     public class Circle : Shape
     {
-        public double radius { get; set; }
+        public double Radius { get; set; }
         public Circle()
         {
 
@@ -21,7 +21,7 @@ namespace OOP
 
         public override double Area()
         {
-            throw new NotImplementedException();
+            return PI*Radius*Radius;
         }
     }
 }
