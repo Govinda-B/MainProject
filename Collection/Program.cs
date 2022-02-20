@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Collection
@@ -62,7 +63,25 @@ namespace Collection
                     kvp.Key, kvp.Value);
             }
 
+            ArrayList arrayList = new ArrayList();
+            arrayList.Add(1);
+            arrayList.Add(true);
+            arrayList.Add("Hello");
+            foreach (var item in arrayList)
+            {
+                Console.WriteLine(item);
+            }
 
+
+            Hashtable hashtable = new Hashtable();
+
+            // Add some elements to the hash table. There are no
+            // duplicate keys, but some of the values are duplicates.
+            hashtable.Add("txt", "notepad.exe");
+            hashtable.Add("bmp", true);
+            hashtable.Add("dib", 1);
+            hashtable.Add("rtf", "wordpad.exe");
+            Console.WriteLine(hashtable["txt"]);
         }
     }
 }
