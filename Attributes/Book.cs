@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,10 @@ namespace Attributes
                 addition += item;
             }
             return addition;
+        }
+        public static void Square([In,Out]ref int number)
+        {
+            number *= number;
         }
     }
 }
