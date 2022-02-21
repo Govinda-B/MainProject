@@ -15,6 +15,9 @@ namespace Attributes
             Console.WriteLine(add+"\n"+add2);
 
 
+            int number = 5;
+            Book.Square(ref number);
+            Console.WriteLine(number);
 
             Assembly assembly = typeof(Program).Assembly;
             AssemblyName assemblyName = assembly.GetName();
@@ -30,10 +33,14 @@ namespace Attributes
                     assemblydescriptionattribute.Description);
             }
 
-            //
+            Book book = new Book { newstring = "ssss" };
+            Console.WriteLine(book.newstring);
+            
             Product product = new Product { Id = 1 };
             Console.WriteLine(product.Id);
             Console.WriteLine(product.Name);
+
+            Console.WriteLine(book.newstring);
             Console.ReadKey();
 
         }

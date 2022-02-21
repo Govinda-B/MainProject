@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Attributes
 {
     using System;
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method, AllowMultiple = true)]
     public class AuthorAttribute : Attribute
     {
         private string name;
