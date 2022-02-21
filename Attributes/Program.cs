@@ -15,6 +15,9 @@ namespace Attributes
             Console.WriteLine(add+"\n"+add2);
 
 
+            int number = 5;
+            Book.Square(ref number);
+            Console.WriteLine(number);
 
             Assembly assembly = typeof(Program).Assembly;
             AssemblyName assemblyName = assembly.GetName();
