@@ -410,7 +410,56 @@ namespace LinqDemo
             {
                 Console.WriteLine(name);
             }
+            Console.WriteLine("\n\n\n\n\n\n\nMultiple Inner Join");
+            Person phyllis = new("Phyllis", "Harris");
 
+            people.Add(phyllis);
+            List<Cat> cats = new()
+            {
+                new(Name: "Barley", Owner: terry),
+                new("Boots", terry),
+                new("Whiskers", charlotte),
+                new("Blue Moon", rui),
+                new("Daisy", magnus),
+            };
+
+            List<Dog> dogs = new()
+            {
+                new(Name: "Four Wheel Drive", Owner: phyllis),
+                new("Duke", magnus),
+                new("Denim", terry),
+                new("Wiley", charlotte),
+                new("Snoopy", rui),
+                new("Snickers", arlene),
+            };
+
+            // The first join matches Person and Cat.Owner from the list of people and
+            // cats, based on a common Person. The second join matches dogs whose names start
+            // with the same letter as the cats that have the same owner.
+            var query2 =
+                from person in people
+                join cat in cats on person equals cat.Owner
+                join dog in dogs on new
+                {
+                    Owner = person,
+                    Letter = cat.Name.Substring(0, 1)
+                } equals new
+                {
+                    dog.Owner,
+                    Letter = dog.Name.Substring(0, 1)
+                }
+                select new
+                {
+                    CatName = cat.Name,
+                    DogName = dog.Name
+                };
+
+            foreach (var obj in query2)
+            {
+                Console.WriteLine(
+                    $"The cat \"{obj.CatName}\" shares a house, and the first letter of their name, with \"{obj.DogName}\"."
+                );
+            }
         }
     }
 }
