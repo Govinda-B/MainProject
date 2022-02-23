@@ -30,18 +30,21 @@ namespace LinqDemo
             IEnumerable<string> str2 = str
                                         .Where(s => s[0] == 'a')
                                         .OrderBy(s=>s.Length)
-                                        .ToList();
+                                        .ToArray();
             foreach (var item in str2)
             {
                 Console.WriteLine(item);
             }
 
+            
+
             List<Book> books = new List<Book>();
             books.Add(new Book { id = 1, name = "Harry potter and socerer's stone", author = "JK Rowling" });
-            books.Add(new Book { id = 2, name = "Harry potter and chamber of secret", author = "JK Rowling" });
-            books.Add(new Book { id = 3, name = "Harry potter and prisoner of azkaban", author = "JK Rowling" });
-            books.Add(new Book { id = 4, name = "Harry potter and Goblet of fire", author = "JK Rowling" });
-            books.Add(new Book { id = 5, name = "Harry potter and order of the phoenix", author = "JK Rowling" });
+            books.Add(new Book { id = 2, name = "karry potter and chamber of secret", author = "JK Rowling" });
+            books.Add(new Book { id = 3, name = "karry potter and prisoner of azkaban", author = "JK Rowling" });
+
+            books.Add(new Book { id = 4, name = "barry potter and Goblet of fire", author = "JK Rowling" });
+            books.Add(new Book { id = 5, name = "barry potter and order of the phoenix", author = "JK Rowling" });
             books.Add(new Book { id = 6, name = "Harry potter and half blood prince", author = "JK Rowling" });
             books.Add(new Book { id = 7, name = "Harry potter and deathly hallows", author = "JK Rowling" });
 
@@ -49,6 +52,22 @@ namespace LinqDemo
                                         .Where(book => book.name.Contains("half"))
                                         .OrderBy(book => book.name)
                                         .ToList();
+
+
+            //Lookup
+            ILookup<char, string> lookup =
+                                        books
+                                        .ToLookup(p => p.name[0],
+                                        p => p.name + " " + p.author);
+
+            foreach (IGrouping<char, string> item in lookup)
+            {
+                Console.WriteLine(item.Key);
+                foreach (string  member in item)
+                {
+                    Console.WriteLine(member);
+                }
+            }
 
             foreach (var item in names)
             {
