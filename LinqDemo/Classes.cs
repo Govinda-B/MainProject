@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace LinqDemo
 {
-    class Classes
-    {
-
-    }
+    
     record Person(string FirstName, string LastName);
     record Pet(string Name, Person Owner);
     record Employee(string FirstName, string LastName, int EmployeeID);
     record Cat(string Name, Person Owner) : Pet(Name, Owner);
     record Dog(string Name, Person Owner) : Pet(Name, Owner);
+
+    record Product(string Name, int CategoryID);
+    record Category(string Name, int ID);
 }
