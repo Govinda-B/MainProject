@@ -51,9 +51,21 @@ namespace LinqDemo
             books.Add(new Book { id = 9, name = "A game of thrones", author = "GRRMartin" });
 
             IEnumerable<Book> names = books
-                                        .Where(book => book.name.Contains("half"))
+                                        .Where(book => book.name.Contains("arry"))
                                         .OrderBy(book => book.name)
                                         .ToList();
+
+
+            IQueryable<Book> books2 = books.AsQueryable()
+                                    .Where(book => book.name.Contains("of"));
+
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            foreach (var item in books2)
+            {
+                Console.WriteLine(item.name);
+            }
+
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
             //Group Query Result
             Console.WriteLine("Group Query Result");
