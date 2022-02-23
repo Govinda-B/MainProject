@@ -338,6 +338,43 @@ namespace LinqDemo
                 Console.WriteLine($"{name.LastName}: {name.ID}");
             }
 
+
+
+            Console.WriteLine("\n\n\n\n\n\n\n Inner Join");
+            Person magnus = new(FirstName: "Magnus", LastName: "Hedlund");
+            Person terry = new("Terry", "Adams");
+            Person charlotte = new("Charlotte", "Weiss");
+            Person arlene = new("Arlene", "Huff");
+            Person rui = new("Rui", "Raposo");
+
+            List<Person> people = new() { magnus, terry, charlotte, arlene, rui };
+
+            List<Pet> pets = new()
+            {
+                new(Name: "Barley", Owner: terry),
+                new("Boots", terry),
+                new("Whiskers", charlotte),
+                new("Blue Moon", rui),
+                new("Daisy", magnus),
+            };
+
+            // Create a collection of person-pet pairs. Each element in the collection
+            // is an anonymous type containing both the person's name and their pet's name.
+            var query =
+                from person in people
+                join pet in pets on person equals pet.Owner
+                select new
+                {
+                    OwnerName = person.FirstName,
+                    PetName = pet.Name
+                };
+
+            foreach (var ownerAndPet in query)
+            {
+                Console.WriteLine($"\"{ownerAndPet.PetName}\" is owned by {ownerAndPet.OwnerName}");
+            }
+
+
         }
     }
 }
