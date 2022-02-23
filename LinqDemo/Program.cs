@@ -278,6 +278,30 @@ namespace LinqDemo
             {
                 Console.WriteLine($"  {item.Level} Highest Score={item.HighestScore}");
             }
+
+
+            Console.WriteLine("\n\n\n\n\nDynamically specify predicate filters at run time");
+            int[] ids = { 111, 114, 112 };
+
+            var queryNames =
+                from student in students
+                where ids.Contains(student.ID)
+                select new
+                {
+                    student.LastName,
+                    student.ID
+                };
+
+            foreach (var student in queryNames)
+            {
+                Console.WriteLine($"{student.LastName}: {student.ID}");
+            }
+            Console.WriteLine("\n\nChanging inputs");
+            ids = new[] { 122, 117, 120, 115 };
+            foreach (var student in queryNames)
+            {
+                Console.WriteLine($"{student.LastName}: {student.ID}");
+            }
         }
     }
 }
