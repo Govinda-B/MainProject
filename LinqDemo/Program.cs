@@ -17,10 +17,10 @@ namespace LinqDemo
             str.Add("sachin");
 
             //LINQ query
-            IEnumerable<string> outstr =from s in str
-                                        where s[0] == 'a'
-                                        orderby s
-                                        select s;
+            IEnumerable<string> outstr = from s in str
+                                         where s[0] == 'a'
+                                         orderby s
+                                         select s;
             foreach (var item in outstr)
             {
                 Console.WriteLine(item);
@@ -29,14 +29,14 @@ namespace LinqDemo
             //Linq Query with lambda expression
             IEnumerable<string> str2 = str
                                         .Where(s => s[0] == 'a')
-                                        .OrderBy(s=>s.Length)
+                                        .OrderBy(s => s.Length)
                                         .ToArray();
             foreach (var item in str2)
             {
                 Console.WriteLine(item);
             }
 
-            
+
 
             List<Book> books = new List<Book>();
             books.Add(new Book { id = 1, name = "Harry potter and socerer's stone", author = "JK Rowling" });
@@ -47,11 +47,29 @@ namespace LinqDemo
             books.Add(new Book { id = 5, name = "barry potter and order of the phoenix", author = "JK Rowling" });
             books.Add(new Book { id = 6, name = "Harry potter and half blood prince", author = "JK Rowling" });
             books.Add(new Book { id = 7, name = "Harry potter and deathly hallows", author = "JK Rowling" });
+            books.Add(new Book { id = 8, name = "A Clash of kings", author = "GRRMartin" });
+            books.Add(new Book { id = 9, name = "A game of thrones", author = "GRRMartin" });
 
             IEnumerable<Book> names = books
                                         .Where(book => book.name.Contains("half"))
                                         .OrderBy(book => book.name)
                                         .ToList();
+
+            //Group Query Result
+            Console.WriteLine("Group Query Result");
+            var groupByAuthorQuery =
+                    from book in books
+                    group book by book.author into newGroup
+                    orderby newGroup.Key
+                    select newGroup;
+            foreach (var nameGroup in groupByAuthorQuery)
+            {
+                Console.WriteLine($"Key: {nameGroup.Key}");
+                foreach (var book in nameGroup)
+                {
+                    Console.WriteLine($"\t{book.author}, {book.name}");
+                }
+            }
 
 
             //Lookup
@@ -63,7 +81,7 @@ namespace LinqDemo
             foreach (IGrouping<char, string> item in lookup)
             {
                 Console.WriteLine(item.Key);
-                foreach (string  member in item)
+                foreach (string member in item)
                 {
                     Console.WriteLine(member);
                 }
@@ -71,7 +89,7 @@ namespace LinqDemo
 
             foreach (var item in names)
             {
-                Console.WriteLine(item.id+"\t\t"+item.name+ "\t\t" + item.author);
+                Console.WriteLine(item.id + "\t\t" + item.name + "\t\t" + item.author);
             }
 
             IEnumerable<string> name = from book in books
@@ -144,6 +162,73 @@ namespace LinqDemo
             foreach (var s in myQuery1)
             {
                 Console.WriteLine(s);
+            }
+
+            var students = Student.students;
+            Console.WriteLine("Group By value");
+            Console.WriteLine();
+            var groupByFirstLetterQuery =
+                from student in students
+                group student by student.LastName[0];
+
+            foreach (var studentGroup in groupByFirstLetterQuery)
+            {
+                Console.WriteLine($"Key: {studentGroup.Key}");
+                // Nested foreach is required to access group items.
+                foreach (var student in studentGroup)
+                {
+                    Console.WriteLine($"\t{student.LastName}, {student.FirstName}");
+                }
+            }
+
+
+            int GetPercentile(Student s)
+            {
+                double avg = s.ExamScores.Average();
+                return avg > 0 ? (int)avg / 10 : 0;
+            }
+
+            Console.WriteLine("Group By Range");
+            Console.WriteLine();
+            var groupByPercentileQuery =
+                from student in students
+                let percentile = GetPercentile(student)
+                group new
+                {
+                    student.FirstName,
+                    student.LastName
+                } by percentile into percentGroup
+                orderby percentGroup.Key
+                select percentGroup;
+
+            // Nested foreach required to iterate over groups and group items.
+            foreach (var studentGroup in groupByPercentileQuery)
+            {
+                Console.WriteLine($"Key: {studentGroup.Key * 10}");
+                foreach (var item in studentGroup)
+                {
+                    Console.WriteLine($"\t{item.LastName}, {item.FirstName}");
+                }
+            }
+
+
+            Console.WriteLine("\n\n\nGroup By comparison ");
+            var groupByHighAverageQuery =
+            from student in students
+            group new
+            {
+                student.FirstName,
+                student.LastName
+            } by student.ExamScores.Average() > 75 into studentGroup
+            select studentGroup;
+
+            foreach (var studentGroup in groupByHighAverageQuery)
+            {
+                Console.WriteLine($"Key: {studentGroup.Key}");
+                foreach (var student in studentGroup)
+                {
+                    Console.WriteLine($"\t{student.FirstName} {student.LastName}");
+                }
             }
         }
     }
