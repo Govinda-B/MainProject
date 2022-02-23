@@ -489,7 +489,24 @@ namespace LinqDemo
                     Console.WriteLine($"  {pet.Name}");
                 }
             }
+            Console.WriteLine("\n\n\n\n\n\n\n\nLeft Outer Join");
 
+            
+
+            var query4 =
+                from person in people
+                join pet in pets on person equals pet.Owner into gj
+                from subpet in gj.DefaultIfEmpty()
+                select new
+                {
+                    person.FirstName,
+                    PetName = subpet?.Name ?? string.Empty
+                };
+
+            foreach (var v in query4)
+            {
+                Console.WriteLine($"{v.FirstName + ":",-15}{v.PetName}");
+            }
         }
     }
 }
