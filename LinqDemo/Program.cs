@@ -374,6 +374,42 @@ namespace LinqDemo
                 Console.WriteLine($"\"{ownerAndPet.PetName}\" is owned by {ownerAndPet.OwnerName}");
             }
 
+            Console.WriteLine("\n\n\n\n Composite Key Join");
+            List<Employee> employees = new()
+            {
+                new(FirstName: "Terry", LastName: "Adams", EmployeeID: 522459),
+                new("Charlotte", "Weiss", 204467),
+                new("Magnus", "Hedland", 866200),
+                new("Vernette", "Price", 437139)
+            };
+
+            List<Student> studentlist = new()
+            {
+                new(FirstName: "Vernette", LastName: "Price", StudentID: 9562),
+                new("Terry", "Earls", 9870),
+                new("Terry", "Adams", 9913)
+            };
+
+            // Join the two data sources based on a composite key consisting of first and last name,
+            // to determine which employees are also students.
+            var newquery =
+                from employee in employees
+                join student in studentlist on new
+                {
+                    employee.FirstName,
+                    employee.LastName
+                } equals new
+                {
+                    student.FirstName,
+                    student.LastName
+                }
+                select employee.FirstName + " " + employee.LastName;
+
+            Console.WriteLine("The following people are both employees and students:");
+            foreach (string name in newquery)
+            {
+                Console.WriteLine(name);
+            }
 
         }
     }
