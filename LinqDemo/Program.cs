@@ -460,6 +460,36 @@ namespace LinqDemo
                     $"The cat \"{obj.CatName}\" shares a house, and the first letter of their name, with \"{obj.DogName}\"."
                 );
             }
+
+            Console.WriteLine("\n\n\n\n\n\nGrouped Join");
+
+            
+            
+
+            // Create a list where each element is an anonymous type
+            // that contains the person's first name and a collection of
+            // pets that are owned by them.
+            var query3 =
+                from person in people
+                join pet in pets on person equals pet.Owner into gj
+                select new
+                {
+                    OwnerName = person.FirstName,
+                    Pets = gj
+                };
+
+            foreach (var v in query3)
+            {
+                // Output the owner's name.
+                Console.WriteLine($"{v.OwnerName}:");
+
+                // Output each of the owner's pet's names.
+                foreach (var pet in v.Pets)
+                {
+                    Console.WriteLine($"  {pet.Name}");
+                }
+            }
+
         }
     }
 }
