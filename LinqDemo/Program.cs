@@ -211,7 +211,7 @@ namespace LinqDemo
                 }
             }
 
-            
+
             Console.WriteLine("\n\n\nGroup By comparison ");
             var groupByHighAverageQuery =
             from student in students
@@ -302,6 +302,42 @@ namespace LinqDemo
             {
                 Console.WriteLine($"{student.LastName}: {student.ID}");
             }
+
+            Console.WriteLine("\n\n\n\nUsing different queries at runtime");
+            FilterByYearType(true);
+            Console.WriteLine("\n With different input");
+            FilterByYearType(false);
+
+
+        }
+
+
+        static void FilterByYearType(bool oddYear)
+        {
+            var students = Student.students;
+            IEnumerable<Student> studentQuery;
+            if (oddYear)
+            {
+                studentQuery =
+                    from student in students
+                    where student.Year == GradeLevel.FirstYear || student.Year == GradeLevel.ThirdYear
+                    select student;
+            }
+            else
+            {
+                studentQuery =
+                    from student in students
+                    where student.Year == GradeLevel.SecondYear || student.Year == GradeLevel.FourthYear
+                    select student;
+            }
+
+            string descr = oddYear ? "odd" : "even";
+            Console.WriteLine($"The following students are at an {descr} year level:");
+            foreach (Student name in studentQuery)
+            {
+                Console.WriteLine($"{name.LastName}: {name.ID}");
+            }
+
         }
     }
 }
