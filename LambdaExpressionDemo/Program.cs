@@ -42,6 +42,16 @@ namespace LambdaExpressionDemo
             Func<int, int, int> constant = (_, _) => 42;
             Console.WriteLine(constant(4,5));
 
+            //Lambda expressions and tuples
+            Func<(int, int, int), (int, int, int)> doubleThem = ns => (2 * ns.Item1, 2 * ns.Item2, 2 * ns.Item3);
+            var numbers3 = (2, 3, 4);
+            var doubledNumbers = doubleThem(numbers3);
+            Console.WriteLine($"The set {numbers3} doubled: {doubledNumbers}");
+
+            Func<(int n1, int n2, int n3), (int, int, int)> doubleNumbers = ns => (2 * ns.n1, 2 * ns.n2, 2 * ns.n3);
+            var doubledNumbers2 = doubleNumbers(numbers3);
+            Console.WriteLine($"The set {numbers3} doubled: {doubledNumbers2}");
+
             int[] numbers2 = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             int oddNumbers = numbers.Count(n => n % 2 == 1);
 
