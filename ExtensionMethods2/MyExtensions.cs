@@ -1,23 +1,29 @@
-﻿//using System;
+﻿using System;
+using Models;
 
-//namespace ExtensionMethods2
-//{
-//    public static class MyExtensions2
-//    {
-//        public static int WordCount(this string str)
-//        {
-//            return str.Split(new char[] { ' ', '.', '?' },
-//                             StringSplitOptions.RemoveEmptyEntries).Length;
-//        }
+namespace ExtensionMethods2
+{
+    public static class Extension
+    {
+        public static void MethodA(this IMyInterface myInterface, int i)
+        {
+            Console.WriteLine
+                ("Extension.MethodA(this IMyInterface myInterface, int i)");
+        }
 
-//        public static string[] SentanceSplit(this string str)
-//        {
-//            return str.Split(new char[] { ' ', '.', '?' },
-//                             StringSplitOptions.RemoveEmptyEntries);
-//        }
-//        public static string FullName(this DomainEntity value)
-//        {
-//            return $"{value.FirstName} {value.LastName}";
-//        }
-//    }
-//}
+        public static void MethodA(this IMyInterface myInterface, string s)
+        {
+            Console.WriteLine
+                ("Extension.MethodA(this IMyInterface myInterface, string s)");
+        }
+
+        // This method is never called in ExtensionMethodsDemo1, because each
+        // of the three classes A, B, and C implements a method named MethodB
+        // that has a matching signature.
+        public static void MethodB(this IMyInterface myInterface)
+        {
+            Console.WriteLine
+                ("Extension.MethodB(this IMyInterface myInterface)");
+        }
+    }
+}

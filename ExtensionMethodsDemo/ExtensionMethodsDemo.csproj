@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExtensionMethods2\ExtensionMethods2.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
 </Project>
