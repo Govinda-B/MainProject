@@ -35,8 +35,26 @@ namespace LinqDemo
             {
                 Console.WriteLine(item);
             }
+            string str3 = str.Where(s => s[0] == 'a')
+                                        .OrderBy(s => s).SkipLast(2).SingleOrDefault();
+            string str8 = str.Where(s => s[0] == 'y')
+                                        .OrderBy(s => s.Length).Single();
+            string str4 = str.Where(s => s[0] == 'a')
+                                                    .OrderBy(s => s.Length).Last();
+            string str5 = str.Where(s => s[0] == 'a')
+                                                    .OrderBy(s => s.Length).LastOrDefault();
+            string str6 = str.Where(s => s[0] == 'g')
+                                                    .OrderBy(s => s.Length).FirstOrDefault();
+            string str7 = str.Where(s => s[0] == 'y')
+                                                    .OrderBy(s => s.Length).First();
 
-
+            Console.WriteLine("\n\n\n\n\n\n\n\n");
+            Console.WriteLine(str3);
+            Console.WriteLine(str8);
+            Console.WriteLine(str4);
+            Console.WriteLine(str5);
+            Console.WriteLine(str6);
+            Console.WriteLine(str7);
 
             List<Book> books = new List<Book>();
             books.Add(new Book { id = 1, name = "Harry potter and socerer's stone", author = "JK Rowling" });
