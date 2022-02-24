@@ -11,7 +11,7 @@ namespace Attributes
     [Author("Brian Kernighan")]
     class Book
     {
-        [MinLength(length:20,ErrorMessage ="Minimum length should be 20")] 
+        [MinLength(length:20,ErrorMessage ="Minimum length should be 20")]
         public string newstring { get; set; }
         [EmailAddress(ErrorMessage ="Enter a valid email address")]
         [Required(ErrorMessage ="Field can not be empty")]
