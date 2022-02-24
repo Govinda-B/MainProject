@@ -41,6 +41,11 @@ namespace Attributes
             Console.WriteLine(product.Name);
 
             Console.WriteLine(book.newstring);
+
+            Registration registration = new Registration();
+            Console.WriteLine("Enter Email id");
+            registration.Email = Console.ReadLine();
+            Console.WriteLine(registration.Email);
             Console.ReadKey();
 
         }
