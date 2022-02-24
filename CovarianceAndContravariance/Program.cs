@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CovarianceAndContravariance
 {
@@ -17,7 +18,7 @@ namespace CovarianceAndContravariance
             // Covariance.
             IEnumerable<string> strings = new List<string>();
             IEnumerable<object> objects = strings;
-
+            
             // Contravariance.
             Action<object> actObject = SetObject;
             Action<string> actString = actObject;
@@ -47,6 +48,31 @@ namespace CovarianceAndContravariance
             //implicit reference conversion for generic interfaces
             IEnumerable<String> strings1 = new List<String>();
             IEnumerable<Object> objects1 = strings1;
+
+
+            //Covariance in Interfaces
+            IReadOnlyList<string> newstring = new List<string>();
+            IReadOnlyList<object> newobject = newstring;
+
+
+            //Contravariance in Interfaces
+            IEqualityComparer<BaseClass> baseComparer = new BaseComparer();
+
+            // Implicit conversion of IEqualityComparer<BaseClass> to
+            // IEqualityComparer<DerivedClass>.
+            IEqualityComparer<DerivedClass> childComparer = baseComparer;
+
+            IEnumerable<int> integers = new List<int>();
+            // The following statement generates a compiler error,
+            // because int is a value type.
+            // IEnumerable<Object> objects = integers;
+
+            // The following line generates a compiler error
+            // because classes are invariant.
+            // List<Object> list = new List<String>();
+
+            // You can use the interface object instead.
+            IEnumerable<Object> listObjects = new List<String>();
 
         }
         static void SetObject(object o) { }
