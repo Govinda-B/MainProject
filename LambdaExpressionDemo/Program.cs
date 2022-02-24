@@ -90,15 +90,26 @@ namespace LambdaExpressionDemo
 
 
 
+            //Capture of outer variables and variable scope in lambda expressions
+            Console.WriteLine("\n\n\n\nCapture of outer variables and variable scope in lambda expressions");
+            var game = new VariableCaptureGame();
+
+            int gameInput = 5;
+            game.Run(gameInput);
+
+            int jTry = 10;
+            bool result2 = game.isEqualToCapturedLocalVariable(jTry);
+            Console.WriteLine($"Captured local variable is equal to {jTry}: {result2}");
+
+            int anotherJ = 3;
+            game.updateCapturedLocalVariable(anotherJ);
+
+            bool equalToAnother = game.isEqualToCapturedLocalVariable(anotherJ);
+            Console.WriteLine($"Another lambda observes a new value of captured variable: {equalToAnother}");
 
 
 
-
-
-
-
-
-
+            Console.WriteLine("\n\n\n");
             int[] numbers2 = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             int oddNumbers = numbers.Count(n => n % 2 == 1);
 
