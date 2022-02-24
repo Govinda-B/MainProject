@@ -582,6 +582,56 @@ namespace LinqDemo
                     Console.WriteLine($"  {prodItem.Name,-10} {prodItem.CategoryID}");
                 }
             }
+
+
+            List<Category> categories1 = new()
+            {
+                new(Name: "Beverages", ID: 001),
+                new("Condiments", 002),
+                new("Vegetables", 003),
+                new("Grains", 004),
+                new("Fruit", 005)
+            };
+
+            List<NewProduct> products1 = new()
+            {
+                new(PName: "Cola", CategoryID: 001),
+                new("Tea", 001),
+                new("Mustard", 002),
+                new("Pickles", 002),
+                new("Carrots", 003),
+                new("Bok Choy", 003),
+                new("Peaches", 005),
+                new("Melons", 005),
+            };
+            var SrvRef = from p in products1
+                         join c in categories1 on p.CategoryID equals c.ID into r_join
+                         from rEmpty in r_join.DefaultIfEmpty()
+                            
+                         select new
+                         {
+                             p.PName,
+                             Category_Name = rEmpty == null ? null : rEmpty.Name
+                         };
+            foreach (var item in SrvRef)
+            {
+                Console.WriteLine(item);
+            }
+
+            var SrvRef2 = from c in categories1
+                          join p in products1
+                          on c.ID equals p.CategoryID into r_join
+                         from rEmpty in r_join.DefaultIfEmpty()
+
+                         select new
+                         {
+                             c.Name,
+                             Product_Name = rEmpty == null ? null : rEmpty.PName
+                         };
+            foreach (var item in SrvRef2)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

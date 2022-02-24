@@ -14,5 +14,6 @@ namespace LinqDemo
     record Dog(string Name, Person Owner) : Pet(Name, Owner);
 
     record Product(string Name, int CategoryID);
+    record NewProduct(string PName, int CategoryID);
     record Category(string Name, int ID);
 }
