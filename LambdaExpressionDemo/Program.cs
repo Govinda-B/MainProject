@@ -6,6 +6,7 @@ namespace LambdaExpressionDemo
 {
     class Program
     {
+        public delegate TResult Func<in T, out TResult>(T arg);
         static void Main(string[] args)
         {
             Func<int, int> square = x => x * x;
@@ -51,6 +52,52 @@ namespace LambdaExpressionDemo
             Func<(int n1, int n2, int n3), (int, int, int)> doubleNumbers = ns => (2 * ns.n1, 2 * ns.n2, 2 * ns.n3);
             var doubledNumbers2 = doubleNumbers(numbers3);
             Console.WriteLine($"The set {numbers3} doubled: {doubledNumbers2}");
+
+            //Lambdas with the standard query operators
+            Console.WriteLine("\n\nLambdas with the standard query operators");
+            Func<int, bool> equalsFive = x => x == 5;
+            bool result = equalsFive(4);
+            Console.WriteLine(result);
+
+            int[] numbers4 = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
+            int oddNumbers2 = numbers4.Count(n => n % 2 == 1);
+            Console.WriteLine($"There are {oddNumbers2} odd numbers in {string.Join(" ", numbers4)}");
+
+            var firstNumbersLessThanSix = numbers.TakeWhile(n => n < 6);
+            Console.WriteLine(string.Join(" ", firstNumbersLessThanSix));
+
+
+            //don't use lambda expressions directly in query expressions, 
+            //but you can use them in method calls within query expressions
+            var numberSets2 = new List<int[]>
+            {
+                new[] { 1, 2, 3, 4, 5 },
+                new[] { 0, 0, 0 },
+                new[] { 9, 8 },
+                new[] { 1, 0, 1, 0, 1, 0, 1, 0 }
+            };
+
+            var setsWithManyPositives2 =
+                from numberSet in numberSets2
+                where numberSet.Count(n => n > 0) > 3
+                select numberSet;
+
+            foreach (var numberSet in setsWithManyPositives2)
+            {
+                Console.WriteLine(string.Join(" ", numberSet));
+            }
+
+
+
+
+
+
+
+
+
+
+
+
 
             int[] numbers2 = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
             int oddNumbers = numbers.Count(n => n % 2 == 1);
