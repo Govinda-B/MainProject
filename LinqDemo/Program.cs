@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,6 +17,21 @@ namespace LinqDemo
             str.Add("yash");
             str.Add("sachin");
 
+            IQueryable<string> outstr3 = str.AsQueryable()
+                                        .Except(new List<string>{"amy","amey"});
+                                    
+            foreach (var item in outstr3)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+
+            IEnumerable<string> outstr2 = str.Skip(4);
+            foreach (var item in outstr2)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
             //LINQ query
             IEnumerable<string> outstr = from s in str
                                          where s[0] == 'a'
