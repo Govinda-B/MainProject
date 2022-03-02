@@ -12,16 +12,4 @@ namespace ExceptionHandling
         {
         }
     }
-    //public class FileNotFoundException : NotFoundException
-    //{
-    //    public FileNotFoundException(string message) : base(message)
-    //    {
-    //    }
-    //}
-    //public class DirectoryNotFoundException : NotFoundException
-    //{
-    //    public DirectoryNotFoundException(string message) : base(message)
-    //    {
-    //    }
-    //}
 }

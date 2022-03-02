@@ -11,6 +11,7 @@ namespace ExceptionHandling
             double a = 98, b = 0;
             double result;
 
+            //Exception Handling
             try
             {
                 result = StaticMethods.SafeDiv(a, b);
@@ -34,10 +35,6 @@ namespace ExceptionHandling
             catch (NotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Done with execution");
             }
             Console.WriteLine("\n\n");
             try
@@ -70,7 +67,29 @@ namespace ExceptionHandling
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
+
+            //try-finally
+            int i = 123;
+            string s = "Some string";
+            object obj = s;
+
+            try
+            {
+                // Invalid conversion; obj contains a string, not a numeric type.
+                i = (int)obj;
+
+                // The following statement is not run.
+                Console.WriteLine("WriteLine at the end of the try block.");
+            }
+            finally
+            {
+                // To run the program in Visual Studio, type CTRL+F5. Then
+                // click Cancel in the error dialog.
+                Console.WriteLine("\nExecution of the finally block after an unhandled\n" +
+                    "error depends on how the exception unwind operation is triggered.");
+                Console.WriteLine("i = {0}", i);
+            }
         }
         
     }
