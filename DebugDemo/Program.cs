@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DebugDemo
 {
@@ -15,13 +16,19 @@ namespace DebugDemo
                 a[i] = i + 1;
                 
             }
-            SendMessage(name, a[letters.Length-1]);
+            Method.SendMessage(name, a[letters.Length-1]);
+
+            //2nd Example
+            var numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            var smallest = Method.GetSmallests(numbers, 5);
+            foreach (int number in smallest)
+            {
+                Console.WriteLine(number);
+            }
+
             Console.ReadKey(); 
         }
 
-        static void SendMessage(string name, int msg)
-        {
-            Console.WriteLine("Hello, " + name + "! Count to " + msg);
-        }
+        
     }
 }
