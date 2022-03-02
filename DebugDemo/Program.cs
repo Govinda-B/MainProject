@@ -13,8 +13,9 @@ namespace DebugDemo
             {
                 name += letters[i];
                 a[i] = i + 1;
-                SendMessage(name, a[i]);
+                
             }
+            SendMessage(name, a[letters.Length-1]);
             Console.ReadKey(); 
         }
 
