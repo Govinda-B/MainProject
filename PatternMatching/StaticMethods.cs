@@ -10,7 +10,7 @@ namespace PatternMatching
     {
         public static T MidPoint<T>(IEnumerable<T> sequence)
         {
-            if (sequence is IList<T> list && sequence.Count() !=0)
+            if (sequence is IList<T> list && sequence.Count() is not 0)
             {
                 return list[list.Count / 2];
             }
