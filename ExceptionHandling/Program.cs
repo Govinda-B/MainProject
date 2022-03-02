@@ -5,6 +5,7 @@ namespace ExceptionHandling
 {
     class Program
     {
+
         static void Main(string[] args)
         {
             double a = 98, b = 0;
@@ -12,13 +13,14 @@ namespace ExceptionHandling
 
             try
             {
-                result = SafeDivision.SafeDiv(a, b);
+                result = StaticMethods.SafeDiv(a, b);
                 Console.WriteLine("{0} divided by {1} = {2}", a, b, result);
             }
             catch (DivideByZeroException ex)
             {
                 Console.WriteLine("Attempted divide by zero.");
                 Console.WriteLine(ex.Message);
+                //throw;
             }
             finally
             {
@@ -31,7 +33,7 @@ namespace ExceptionHandling
             }
             catch (NotFoundException ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -59,7 +61,17 @@ namespace ExceptionHandling
             {
                 Console.WriteLine(ex.Message);
             }
-
+            int[] intarray = { 1, 2, 3, 4, 5, 6, 7 };
+            try
+            {
+                StaticMethods.GetInt(intarray, -5);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
+        
     }
 }
