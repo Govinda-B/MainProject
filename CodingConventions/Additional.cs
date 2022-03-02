@@ -8,6 +8,16 @@ namespace CodingConventions
 {
     public class DataService
     {
+        private IWorkerQueue _workerQueue;
+
+        private static IWorkerQueue s_workerQueue;
+
+        [ThreadStatic]
+        private static TimeSpan t_timeSpan;
+
+        public void SomeMethod<T>(int someNumber, bool isValid)
+        {
+        }
     }
 
     public record PhysicalAddress(
