@@ -10,12 +10,17 @@ namespace DebugDemo
     {
         public static List<int> GetSmallests(List<int> list,int count)
         {
+            if (list.Count < count || count <= 0)
+            {
+                throw new IndexOutOfRangeException($"Index must be between 0 to {list.Count}");
+            }
+            var buffer = list;
             var smallest = new List<int>();
             while(smallest.Count()<count)
             {
-                int min = GetSmallest(list);
+                int min = GetSmallest(buffer);
                 smallest.Add(min);
-                list.Remove(min);
+                buffer.Remove(min);
             }
             return smallest;
         }
@@ -25,7 +30,7 @@ namespace DebugDemo
             int min = list[0];
             for (var i = 0; i < list.Count; i++)
             {
-                if (list[i]>min)
+                if (list[i]<min)
                 {
                     min = list[i];
                 }

@@ -20,11 +20,20 @@ namespace DebugDemo
 
             //2nd Example
             var numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            var smallest = Method.GetSmallests(numbers, 5);
-            foreach (int number in smallest)
+            try
             {
-                Console.WriteLine(number);
+                var smallest = Method.GetSmallests(numbers, -4);
+                foreach (int number in smallest)
+                {
+                    Console.WriteLine(number);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            
 
             Console.ReadKey(); 
         }
