@@ -21,7 +21,7 @@ namespace LinqAssignment
 
             string name = "Dairy";
             // Average price of dairy product by category name
-            Console.WriteLine("Average price of dairy product by category name");
+            Console.WriteLine("\nAverage price of dairy product by category name");
             double averagePriceofDairyProducts = products
                                                 .Where(product => product.CategoryId.Equals(categories.Where(category => category.Name.Equals(name)).Single().Id))
                                                 .Average(product => product.Price);
@@ -34,7 +34,7 @@ namespace LinqAssignment
 
             // 2) Display total quantity of products (both category wise and all products).
             // Total Quantity of all products
-            Console.WriteLine("Total Quantity of all products");
+            Console.WriteLine("\nTotal Quantity of all products");
             int TotalQuantityfAllProducts = products.Sum(product => product.Quantity);
             Console.WriteLine($"Quantity of products in given category is {TotalQuantityfAllProducts}");
 
@@ -52,16 +52,14 @@ namespace LinqAssignment
                                             .Where(product => product.CategoryId.Equals(id))
                                             .Max(product => product.Price);
 
-
             IEnumerable<Product> costliestProductInCategory = products.Where(product => product.CategoryId.Equals(id) && product.Price.Equals(maxPrice))
                                                 .ToList();
 
             foreach (Product item in costliestProductInCategory)
             {
-                Console.WriteLine(item.Id + item.Name);
+                Console.WriteLine(item.Name+"\t"+item.Price);
             }
             
-
             // 4) Display cheapest product details of a specific category.
             Console.WriteLine(" Display cheapest product details of a specific category.");
              double cheapestPrice = products
@@ -77,6 +75,7 @@ namespace LinqAssignment
                 }
             Console.WriteLine();
             // 5) Filter products which have crossed the Expiry date.
+            Console.WriteLine("\nFilter products which have crossed the Expiry date.");
             List<Product> expiredProductList = products
                                         .Where(product => product.ExpiryDate.CompareTo(DateTime.Now) < 0 && !product.ExpiryDate.Equals(Convert.ToDateTime("01-01-0001")))
                                         .ToList();
@@ -84,18 +83,18 @@ namespace LinqAssignment
             {
                 Console.WriteLine(item.Name);
             }
-            Console.WriteLine();
+
             // 6) Filter products which are expiring in next month.
-            Console.WriteLine("Filter products which are expiring in next month.");
+            Console.WriteLine("\nFilter products which are expiring in next month.");
             try
             {
                 DateTime dateTime = new DateTime();
                 dateTime = DateTime.Today;
                 dateTime.AddMonths(1);
                 List<Product> expiryProductListInNextMonth = products
-                                        .Where(product => product.ExpiryDate.CompareTo(dateTime) <= 0)
+                                        .Where(product => product.ExpiryDate.CompareTo(DateTime.Now.AddDays(30)) < 0 && !(product.ExpiryDate.CompareTo(DateTime.Now) < 0))
                                         .ToList();
-                foreach (Product item in expiredProductList)
+                foreach (Product item in expiryProductListInNextMonth)
                 {
                     Console.WriteLine(item.Name);
                 }
@@ -124,7 +123,7 @@ namespace LinqAssignment
                 Console.WriteLine("No product in given categoryId");
             }
             // Find Product by Category name
-            Console.WriteLine("Find Product by Category name");
+            Console.WriteLine("\nFind Product by Category name");
             var newName = "Fruit";
             try
             {
@@ -144,7 +143,7 @@ namespace LinqAssignment
             
 
             //Find Product by name
-            Console.WriteLine("Find Product by name\n");
+            Console.WriteLine("\nFind Product by name");
             try
             {
                 Product ProductsByName = products
@@ -157,9 +156,8 @@ namespace LinqAssignment
                 Console.WriteLine(ex.Message);
             }
 
-
             // Find Product by id
-            Console.WriteLine("Find Product by id");
+            Console.WriteLine("\nFind Product by id");
             try
             {
 
@@ -206,7 +204,6 @@ namespace LinqAssignment
             {
                 Console.WriteLine(item.Name);
             }
-            Console.WriteLine();
 
             // 2) Display unique products from both lists.
             Console.WriteLine("\nDisplay unique products from both lists.");
@@ -230,7 +227,7 @@ namespace LinqAssignment
                 Console.WriteLine(item.Name);
             }
             // 4) Unique products from list 1.
-            Console.WriteLine("Unique products from list 1.");
+            Console.WriteLine("\nUnique products from list 1.");
             Console.WriteLine();
             foreach (var item in distinctProductsInList1)
             {
@@ -241,7 +238,7 @@ namespace LinqAssignment
             // Sort by price(Ascending)
             var sortProductByPrice = products
                                         .OrderBy(product => product.Price);
-            Console.WriteLine("Sort by Price(Ascending)");
+            Console.WriteLine("\nSort by Price(Ascending)");
             foreach (Product item in sortProductByPrice)
             {
                 Console.WriteLine(item.Price + "\t" + item.Name);
@@ -251,7 +248,7 @@ namespace LinqAssignment
             // Sort by price(Descending)
             var sortProductByPriceDesc = products
                                         .OrderByDescending(product => product.Price);
-            Console.WriteLine("Sort by Price(Descending)");
+            Console.WriteLine("\nSort by Price(Descending)");
             foreach (Product item in sortProductByPriceDesc)
             {
                 Console.WriteLine(item.Price + "\t" + item.Name);
@@ -262,7 +259,7 @@ namespace LinqAssignment
             var sortProductByQuantity = products
                                         .OrderBy(product => product.Quantity)
                                         .ThenBy(product => product.Name);
-            Console.WriteLine("Sort by Quantity(Ascending)");
+            Console.WriteLine("\nSort by Quantity(Ascending)");
             foreach (Product item in sortProductByQuantity)
             {
                 Console.WriteLine(item.Quantity + "\t" + item.Name);
@@ -271,17 +268,17 @@ namespace LinqAssignment
             // Sort by Expiry Date(Ascending)
             IEnumerable<Product> sortProductByExpiryDate = products
                                         .OrderBy(product => product.ExpiryDate);
-            Console.WriteLine("Sort by Expiry Date(Ascending)");
+            Console.WriteLine("\nSort by Expiry Date(Ascending)");
             foreach (Product item in sortProductByExpiryDate)
             {
                 Console.WriteLine(item.ExpiryDate+"\t"+item.Name);
             }
 
             // 10) Make use of "Any", "All" and "Contains" on product list.
-            Console.WriteLine("Any Product description has keyword 'Fresh'");
+            Console.WriteLine("\nAny Product description has keyword 'Fresh'");
             bool anyDescriptionContainFresh = products.Any(product => product.Description.Contains("Fresh"));
             Console.WriteLine(anyDescriptionContainFresh);
-            Console.WriteLine("All Product description has keyword 'Fresh'");
+            Console.WriteLine("\nAll Product description has keyword 'Fresh'");
             bool allDescriptionContainFresh = products.All(product => product.Description.Contains("Fresh"));
             Console.WriteLine(allDescriptionContainFresh);
 
@@ -300,23 +297,11 @@ namespace LinqAssignment
                                         ProductPrice = product.Price,
                                         ProductDescription = product.Description
                                     });
-            Console.WriteLine("\njoin of product and category\n");
+            Console.WriteLine("\njoin of product and category");
             foreach (var item in joinProductCategory)
             {
                 Console.WriteLine(item);
             }
-
-
-            //Sum of All product prices
-            var TotalPriceofAllProducts = products.Sum(product => product.Price);
-
-            //Product Sorted by Expiry Date
-            var productSortedByExpiryDate = products.OrderBy(product => product.ExpiryDate);
-
-
-
-            
-            Console.WriteLine(averagePriceofDairyProducts);
 
         }
 
@@ -324,7 +309,7 @@ namespace LinqAssignment
         {
             var products = Product.GetProducts();
             return products
-                .Where(product => product.CategoryId.Equals(1))
+                .Where(product => product.CategoryId.Equals(i))
                 .Average(product => product.Price);
         }
     }
