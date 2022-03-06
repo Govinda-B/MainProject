@@ -13,7 +13,7 @@ namespace CovarianceAndContravariance
             string str = "test";
             // An object of a more derived type is assigned to an object of a less derived type.
             object obj = str;
-            //Console.WriteLine(obj);
+            Console.WriteLine(obj);
 
             // Covariance.
             IEnumerable<string> strings = new List<string>();
@@ -74,6 +74,33 @@ namespace CovarianceAndContravariance
             // You can use the interface object instead.
             IEnumerable<Object> listObjects = new List<String>();
 
+
+            //ContraVarient Delegates
+            Action<Parent> Print = PrintParent;
+            Parent parent = new Parent();
+            parent.Name = "Dinesh";
+            Print(parent);
+            Action<Child> PrintChild = PrintParent;
+            Child child = new Child();
+            child.Name = "Pranav";
+            PrintChild(child);
+
+            //Covarient Delegates
+            Func<string, Parent> CreateParent = CreateChild;
+            Func<string, Child> Create = CreateChild;
+            Parent parent1 = CreateParent("abc");
+            Child child1 = Create("def");
+
+        }
+
+        static Child CreateChild(string name)
+        {
+            return new Child() { Name=name};
+        }
+
+        static void PrintParent(Parent parent)
+        {
+            Console.WriteLine(parent.Name);
         }
         static void SetObject(object o) { }
         static object GetObject() { return null; }
