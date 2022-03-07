@@ -6,9 +6,25 @@ namespace CovarianceAndContravariance
 {
     class Program
     {
+        public delegate Parent ParentDelegate(Child child);
+        public delegate R NewDelegate<R,P>(P p);
         static void Main(string[] args)
         {
-            
+
+            Parent parent2 = new Parent() { Name = "gvd" };
+            Child child3 = new Child() { Name = "gvd" };
+            ParentDelegate parentToChildDelegate = GetChildFromParent;
+            ParentDelegate parentToParentDelegate = GetParent;
+            ParentDelegate childToChildFDelegate = GetChild;
+            ParentDelegate childToParentDelegate = GetParentFromChild;
+
+            Parent child2 = parentToChildDelegate(child3);
+            Parent child4 = parentToParentDelegate(child3);
+            Parent child5 = childToParentDelegate(child3);
+            //Parent child6 = childToChildDelegate(child3);
+
+
+
             // Assignment compatibility.
             string str = "test";
             // An object of a more derived type is assigned to an object of a less derived type.
@@ -91,6 +107,8 @@ namespace CovarianceAndContravariance
             Parent parent1 = CreateParent("abc");
             Child child1 = Create("def");
 
+
+
         }
 
         static Child CreateChild(string name)
@@ -101,6 +119,26 @@ namespace CovarianceAndContravariance
         static void PrintParent(Parent parent)
         {
             Console.WriteLine(parent.Name);
+        }
+
+        public static Parent GetParent(Parent parent)
+        {
+            return parent;
+        }
+
+        public static Parent GetParentFromChild(Child child)
+        {
+            return new Parent();
+        }
+
+        public static Child GetChild(Child child)
+        {
+            return child;
+        }
+
+        public static Child GetChildFromParent(Parent parent)
+        {
+            return new Child();
         }
         static void SetObject(object o) { }
         static object GetObject() { return null; }
