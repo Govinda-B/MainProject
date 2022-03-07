@@ -37,6 +37,10 @@ namespace Delegates
             Action<string> Line = (data) => Console.WriteLine(data);
             Line("Hello");
 
+            Del DelWrite = name => Console.WriteLine(name);
+
+            DelWrite("govinda");
+
         }
 
         static void Addition(int number1, int number2)
