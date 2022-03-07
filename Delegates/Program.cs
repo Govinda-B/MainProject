@@ -11,12 +11,13 @@ namespace Delegates
         {
             NumberDelegate numberDelegate = Addition;
             numberDelegate += Substraction;
-            numberDelegate += Multiplication;
+            //numberDelegate += Multiplication;
             numberDelegate += Division;
 
             numberDelegate(55, 3);
-
             Del handler = DelegateMethod;
+            Multiplication(55, 3, handler);
+            
             handler("Hello World");
             MethodWithCallback(1, 2, handler);
 
@@ -55,10 +56,10 @@ namespace Delegates
             Console.WriteLine("The substraction is : " + substraction);
         }
 
-        static void Multiplication(int number1, int number2)
+        static void Multiplication(int number1, int number2, Del Print)
         {
             int multiplication = number1 * number2;
-            Console.WriteLine("The multiplication is : " + multiplication);
+            Print("The multiplication is : " + multiplication);
         }
 
         static void Division(int number1, int number2)
